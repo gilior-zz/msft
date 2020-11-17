@@ -1,0 +1,130 @@
+<mat-card *ngIf="dataSource.data.length>0" class="card">
+    <mat-card-header>
+        <mat-card-title>
+            <button [matMenuTriggerFor]="menu" mat-icon-button>
+                <mat-icon>settings</mat-icon>
+                <span>  &nbsp; Manage</span>
+            </button>
+
+            <mat-menu #menu="matMenu">
+                <button (click)="onDeploy()" [disabled]="this.selection.selected.length<1" mat-menu-item>
+                    <mat-icon>cloud_upload</mat-icon>
+                    <span>Deploy</span>
+                </button>
+                <button (click)="onEdit()" [disabled]="this.selection.selected.length!=1" mat-menu-item>
+                    <mat-icon>edit</mat-icon>
+                    <span>Edit Template</span>
+                </button>
+            </mat-menu>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <table  [dataSource]="dataSource"
+               class="mat-elevation-z8" mat-table
+               multiTemplateDataRows>
+
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+                <th *matHeaderCellDef mat-header-cell>
+                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                                  [aria-label]="checkboxLabel()"
+                                  [checked]="selection.hasValue() && isAllSelected()"
+                                  [indeterminate]="selection.hasValue() && !isAllSelected()">
+                    </mat-checkbox>
+                </th>
+                <td *matCellDef="let row" mat-cell>
+                    <mat-checkbox (change)="$event ? selection.toggle(row) : null"
+                                  (click)="$event.stopPropagation()"
+                                  [aria-label]="checkboxLabel(row)"
+                                  [checked]="selection.isSelected(row)">
+                    </mat-checkbox>
+                </td>
+            </ng-container>
+
+            <!-- id Column -->
+            <ng-container matColumnDef="id">
+                <th *matHeaderCellDef [hidden]="true" mat-header-cell> id</th>
+                <td *matCellDef="let element" [hidden]="true" mat-cell> {{element.id}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th *matHeaderCellDef mat-header-cell> Name</th>
+                <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+            </ng-container>
+
+            <!-- type Column -->
+            <ng-container matColumnDef="type">
+                <th *matHeaderCellDef mat-header-cell> type</th>
+                <td *matCellDef="let element" mat-cell> {{element.type}} </td>
+            </ng-container>
+
+            <!-- kind Column -->
+            <ng-container matColumnDef="kind">
+                <th *matHeaderCellDef mat-header-cell> kind</th>
+                <td *matCellDef="let element" mat-cell> {{element.kind}} </td>
+            </ng-container>
+
+            <!-- actions Column -->
+            <ng-container matColumnDef="actions" stickyEnd>
+                <th *matHeaderCellDef mat-header-cell></th>
+                <td *matCellDef="let element" mat-cell>
+                    <button (click)="$event.stopPropagation()" [matMenuTriggerFor]="menu" mat-icon-button>
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+
+                    <mat-menu #menu="matMenu">
+                        <button (click)="onDeploy(element.name)" mat-menu-item>
+                            <mat-icon>cloud_upload</mat-icon>
+                            <span>Deploy</span>
+                        </button>
+                        <button (click)="onEdit(element.name)" mat-menu-item>
+                            <mat-icon>edit</mat-icon>
+                            <span>Edit Template</span>
+                        </button>
+
+                    </mat-menu>
+                </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="expandedDetail">
+                <td *matCellDef="let element" [attr.colspan]="displayedColumns.length" mat-cell>
+                    <div [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"
+                         class="element-detail">
+                        <div *ngFor="let item of element.properties | keyvalue">
+                            <mat-card>
+                                <mat-card-header>
+
+                                    <mat-card-subtitle>
+                                        {{item.key}}:
+                                    </mat-card-subtitle>
+
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <p>
+                                        {{item.value}}
+                                    </p>
+                                </mat-card-content>
+                            </mat-card>
+
+                        </div>
+
+
+                    </div>
+                </td>
+            </ng-container>
+
+            <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+            <tr (click)="expandedElement = expandedElement === element ? null : element"
+                *matRowDef="let element; columns: displayedColumns;"
+                [class.expanded-row]="expandedElement === element"
+                class="element-row"
+                mat-row>
+            </tr>
+            <tr *matRowDef="let row; columns: ['expandedDetail']" class="detail-row" mat-row></tr>
+        </table>
+    </mat-card-content>
+
+
+</mat-card>

@@ -1,0 +1,61 @@
+table {
+  width: 100%;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: darkgrey;
+
+  ::ng-deep .mat-card,.mat-cell{
+    color: black !important;  }
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.lement-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  cursor: default;
+  margin-top: 10px;
+  mat-card{
+    background: lightblue;
+    color: black;
+  }
+  mat-card-subtitle{
+    color: black;
+  }
+}
+
+
+::ng-deep .mat-card-header-text {
+  margin-left: 0 !important;
+}
+
+::ng-deep td {
+  cursor: pointer;
+}
+
+mat-card-subtitle {
+  margin: 0 !important;
+}
+
+
+mat-card {
+  margin-bottom: 10px;
+  cursor: default;
+}
+
+.card {
+  position: fixed;
+  min-height: 100%;
+  max-height: 100%;
+  overflow-y: scroll;
+}

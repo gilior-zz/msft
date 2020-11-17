@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>System Message</h1>
+<div mat-dialog-content>
+    <div *ngFor="let item of content | keyvalue">
+        <mat-card>
+            <mat-card-header>
+
+                <mat-card-subtitle>
+                    {{item.key}}:
+                </mat-card-subtitle>
+
+            </mat-card-header>
+            <mat-card-content>
+                <p>
+                    {{item.value}}
+                </p>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+</div>
