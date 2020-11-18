@@ -2,3 +2,16 @@ table {
   width: 100%;
   margin-bottom: 20px;
 }
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: white !important;
+}
+
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: white !important;
+}
+
+
+
+
+
