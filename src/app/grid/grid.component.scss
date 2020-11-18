@@ -9,8 +9,9 @@ tr.detail-row {
 tr.element-row:not(.expanded-row):hover {
   background: darkgrey;
 
-  ::ng-deep .mat-card,.mat-cell{
-    color: black !important;  }
+  ::ng-deep .mat-card, .mat-cell {
+    color: black !important;
+  }
 }
 
 tr.element-row:not(.expanded-row):active {
@@ -25,12 +26,10 @@ tr.element-row:not(.expanded-row):active {
   overflow: hidden;
   cursor: default;
   margin-top: 10px;
-  mat-card{
-    background: lightblue;
-    color: black;
-  }
-  mat-card-subtitle{
-    color: black;
+
+  mat-card {
+    border: 1px solid #7b1fa2;
+    border-radius: 10px;
   }
 }
 

@@ -1,36 +1,32 @@
 <mat-card>
-<mat-card-content>
-    <table [dataSource]="dataSource"
-           class="mat-elevation-z8" mat-table
-    >
+    <mat-card-content>
+        <table [dataSource]="dataSource"
+               class="mat-elevation-z8" mat-table>
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-            <th *matHeaderCellDef mat-header-cell> Name</th>
-            <td *matCellDef="let element" mat-cell> {{element.name}} </td>
-        </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th *matHeaderCellDef mat-header-cell> Name</th>
+                <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+            </ng-container>
 
-        <!-- Weight Column -->
-        <ng-container matColumnDef="type">
-            <th *matHeaderCellDef mat-header-cell> type</th>
-            <td *matCellDef="let element" mat-cell> {{element.type}} </td>
-        </ng-container>
+            <!-- type Column -->
+            <ng-container matColumnDef="type">
+                <th *matHeaderCellDef mat-header-cell> type</th>
+                <td *matCellDef="let element" mat-cell> {{element.type}} </td>
+            </ng-container>
 
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="kind">
-            <th *matHeaderCellDef mat-header-cell> kind</th>
-            <td *matCellDef="let element" mat-cell> {{element.kind}} </td>
-        </ng-container>
-
-
-        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-        <tr *matRowDef="let element; columns: displayedColumns;" mat-row></tr>
-
-    </table>
-
-    <msft-dynamic-form *ngIf="fields" [fields]="fields"></msft-dynamic-form>
-</mat-card-content>
+            <!-- element Column -->
+            <ng-container matColumnDef="kind">
+                <th *matHeaderCellDef mat-header-cell> kind</th>
+                <td *matCellDef="let element" mat-cell> {{element.kind}} </td>
+            </ng-container>
 
 
+            <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+            <tr *matRowDef="let element; columns: displayedColumns;" mat-row></tr>
 
+        </table>
+
+        <msft-dynamic-form *ngIf="fields" [fields]="fields"></msft-dynamic-form>
+    </mat-card-content>
 </mat-card>

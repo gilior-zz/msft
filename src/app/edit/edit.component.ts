@@ -6,7 +6,6 @@ import {Created} from "../../store/reducer";
 import {update_templates} from "../../store/actions";
 import {MatTableDataSource} from "@angular/material/table";
 import {Value} from "../../models/template-response";
-import {Observable} from "rxjs";
 import {FieldBase} from "../../models/FieldBase";
 import {FieldService} from "../../services/field.service";
 
@@ -37,12 +36,12 @@ export class EditComponent implements OnInit {
             .subscribe(
                 (data) => {
                     this.template = data.find(i => i.name == this.template_id);
-                    if (this.template){
-                        this.fields = this.fieldService.getQuestions(this.template);
+                    if (this.template) {
+                        this.fields = this.fieldService.getFields(this.template);
                         this.dataSource = new MatTableDataSource([this.template]);
 
                     }
-                                       }
+                }
             )
 
         this.activatedRoute.paramMap.subscribe(

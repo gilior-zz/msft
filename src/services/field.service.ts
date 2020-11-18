@@ -14,9 +14,7 @@ export class FieldService {
     constructor() {
     }
 
-    getQuestions(template: Value): FieldBase<any>[] {
-
-
+    getFields(template: Value): FieldBase<any>[] {
         return Object.entries(template.properties).map((prop) => {
             let [key, val] = prop;
             let t = typeof val;
@@ -50,7 +48,7 @@ export class FieldService {
                     return new DropdownField({
                         value: val,
                         key: key,
-                        label:key.replace(/([a-z0-9])([A-Z])/g, '$1 $2'),
+                        label: key.replace(/([a-z0-9])([A-Z])/g, '$1 $2'),
                         options:
                             Object.entries(val).map((i) => {
                                 return {key: i[0].toString(), value: i[1].toString()}
@@ -61,6 +59,5 @@ export class FieldService {
                     })
             }
         }).sort((a, b) => a.order - b.order);
-
     }
 }
